@@ -26,3 +26,6 @@ checkout = git clone -b master git@github.com:rmedaer/cookiecutter
            git -C cookiecutter remote add upstream git@github.com:audreyr/cookiecutter.git
            git -C cookiecutter fetch --all
 
+[milhoja]
+checkout = git clone -b master git@github.com:rmedaer/milhoja
+           git -C milhoja checkout -t origin/develop
