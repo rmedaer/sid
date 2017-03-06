@@ -1,0 +1,28 @@
+[debian/libjwt]
+checkout = git clone -b master git@github.com:rmedaer/deb-libjwt.git libjwt
+           git -C libjwt checkout -t origin/pristine-tar
+           git -C libjwt checkout master
+build = gbp buildpackage -us -uc
+
+[debian/libapache2-mod-authnz-jwt]
+checkout = git clone -b master git@github.com:rmedaer/deb-libapache2-mod-authnz-jwt.git libapache2-mod-authnz-jwt
+           git -C libapache2-mod-authnz-jwt checkout -t origin/pristine-tar
+           git -C libapache2-mod-authnz-jwt checkout -t origin/sid
+build = gbp buildpackage --git-debian-branch=sid -us -uc
+
+[debian/cookiecutter]
+checkout = git clone -b master git@github.com:rmedaer/deb-cookiecutter cookiecutter
+           git -C cookiecutter checkout -t origin/pristine-tar
+           git -C cookiecutter checkout -t origin/sid
+           git -C cookiecutter remote add upstream git://anonscm.debian.org/python-modules/packages/cookiecutter.git
+           git -C cookiecutter fetch --all
+build = gbp buildpackage --git-debian-branch=sid -us -uc
+
+[cookiecutter]
+checkout = git clone -b master git@github.com:rmedaer/cookiecutter
+           git -C cookiecutter checkout -t origin/pr/return_context
+           git -C cookiecutter checkout -t origin/pr/strip_dir
+           git -C cookiecutter checkout master
+           git -C cookiecutter remote add upstream git@github.com:audreyr/cookiecutter.git
+           git -C cookiecutter fetch --all
+
