@@ -23,8 +23,8 @@ Then checkout one of projects or more:
 
 ```sh
 # Checkout libjwt debian packaging and build it
-mr checkout debian/libjwt
-mr build debian/libjwt
+mr -d debian/libjwt checkout
+mr -d debian/libjwt build
 
 # Checkout all projects
 mr checkout
