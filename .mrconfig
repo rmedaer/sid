@@ -1,3 +1,18 @@
+# My own packages
+[milhoja]
+checkout = git clone -b master git@github.com:rmedaer/milhoja
+           git -C milhoja checkout -t origin/develop
+
+# Patched repositories
+[cookiecutter]
+checkout = git clone -b master git@github.com:rmedaer/cookiecutter
+           git -C cookiecutter checkout -t origin/pr/return_context
+           git -C cookiecutter checkout -t origin/pr/strip_dir
+           git -C cookiecutter checkout master
+           git -C cookiecutter remote add upstream git@github.com:audreyr/cookiecutter.git
+           git -C cookiecutter fetch --all
+
+# Debian packages with patches or diversions
 [debian/libjwt]
 checkout = git clone -b master git@github.com:rmedaer/deb-libjwt.git libjwt
            git -C libjwt checkout -t origin/pristine-tar
@@ -18,21 +33,6 @@ checkout = git clone -b master git@github.com:rmedaer/deb-cookiecutter cookiecut
            git -C cookiecutter fetch --all
 build = gbp buildpackage --git-debian-branch=sid -us -uc
 
-[cookiecutter]
-checkout = git clone -b master git@github.com:rmedaer/cookiecutter
-           git -C cookiecutter checkout -t origin/pr/return_context
-           git -C cookiecutter checkout -t origin/pr/strip_dir
-           git -C cookiecutter checkout master
-           git -C cookiecutter remote add upstream git@github.com:audreyr/cookiecutter.git
-           git -C cookiecutter fetch --all
-
-[milhoja]
-checkout = git clone -b master git@github.com:rmedaer/milhoja
-           git -C milhoja checkout -t origin/develop
-
-[debian/milhoja]
-checkout = git clone -b master git@github.com:rmedaer/deb-milhoja
-
 [debian/libgit2]
 checkout = git clone -b master git@github.com:rmedaer/deb-libgit2 libgit2
            git -C libgit2 checkout -t origin/upstream
@@ -41,3 +41,11 @@ checkout = git clone -b master git@github.com:rmedaer/deb-libgit2 libgit2
            git -C libgit2 remote add upstream https://anonscm.debian.org/git/collab-maint/libgit2.git
            git -C libgit2 fetch --all
 build = gbp buildpackage --git-debian-branch=futur/master --git-upstream-branch=futur/upstream --git-no-pristine-tar --git-upstream-tree=branch -us -uc
+
+[debian/python-pygit2]
+checkout = git clone -b master git@github.com:rmedaer/deb-python-pygit2 python-pygit2
+           git -C python-pygit2 checkout -t origin/sid
+           git -C python-pygit2 remote add debian https://anonscm.debian.org/git/openstack/deb-python-pygit2.git
+           git -C python-pygit2 remote add upstream https://github.com/libgit2/pygit2
+           git -C python-pygit2 fetch --all
+build = gbp buildpackage --git-debian-branch=sid --git-upstream-branch=master --git-upstream-tree=tag --git-upstream-tag='v%(version)s' --git-no-pristine-tar -us -uc
