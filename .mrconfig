@@ -29,3 +29,15 @@ checkout = git clone -b master git@github.com:rmedaer/cookiecutter
 [milhoja]
 checkout = git clone -b master git@github.com:rmedaer/milhoja
            git -C milhoja checkout -t origin/develop
+
+[debian/milhoja]
+checkout = git clone -b master git@github.com:rmedaer/deb-milhoja
+
+[debian/libgit2]
+checkout = git clone -b master git@github.com:rmedaer/deb-libgit2 libgit2
+           git -C libgit2 checkout -t origin/upstream
+           git -C libgit2 checkout -t origin/futur/upstream
+           git -C libgit2 checkout -t origin/futur/master
+           git -C libgit2 remote add upstream https://anonscm.debian.org/git/collab-maint/libgit2.git
+           git -C libgit2 fetch --all
+build = gbp buildpackage --git-debian-branch=futur/master --git-upstream-branch=futur/upstream --git-no-pristine-tar --git-upstream-tree=branch -us -uc
