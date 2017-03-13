@@ -11,6 +11,12 @@ checkout = git clone -b master git@github.com:rmedaer/pyolite2
 build = git -C pyolite2 checkout master
         gbp buildpackage --git-export-dir=../build-area/python-pyolite2 --git-debian-branch=master -us -uc
 
+[whiriho]
+checkout = git clone -b master git@github.com:rmedaer/whiriho
+           git -C whiriho checkout -t origin/develop
+build = git -C whiriho checkout master
+        gbp buildpackage --git-export-dir=../build-area/python-whiriho --git-debian-branch=master -us -uc
+
 # Patched repositories
 [cookiecutter]
 checkout = git clone -b master git@github.com:rmedaer/cookiecutter
@@ -57,3 +63,9 @@ checkout = git clone -b master git@github.com:rmedaer/deb-python-pygit2 python-p
            git -C python-pygit2 remote add upstream https://github.com/libgit2/pygit2
            git -C python-pygit2 fetch --all
 build = gbp buildpackage --git-export-dir=../../build-area/python-pygit2 --git-debian-branch=sid --git-upstream-branch=master --git-upstream-tree=tag --git-upstream-tag='v%(version)s' --git-no-pristine-tar -us -uc
+
+[debian/python-anyconfig]
+checkout = git clone -b master git@github.com:rmedaer/deb-python-anyconfig python-anyconfig
+           git -C python-anyconfig checkout -t origin/pristine-tar
+           git -C python-anyconfig checkout master
+build = gbp buildpackage --git-export-dir=../../build-area/python-anyconfig -us -uc
